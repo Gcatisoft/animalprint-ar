@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Animal Print · Remeras Estampadas</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -118,8 +120,8 @@
   .product-card:hover img { transform: scale(1.06); filter: brightness(0.6); }
   .product-overlay {
     position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.02) 50%, transparent 100%);
-    display: flex; align-items: flex-end; padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.05) 55%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end; padding: 1rem;
     opacity: 0; transition: opacity 0.3s;
   }
   .product-card:hover .product-overlay { opacity: 1; }
@@ -200,18 +202,45 @@
   .float-wsp:hover { transform: scale(1.08); }
 
 
-  /* buzo sub-section */
-  .products-subheader { margin-top: 3rem; margin-bottom: 1.25rem; }
-  .products-sub-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 5vw, 2.8rem); letter-spacing: 0.05em; }
-  .buzo-grid { grid-template-columns: repeat(5, 1fr) !important; margin-top: 0; }
+  /* ── BUZOS SECTION ── */
+  .buzos-section {
+    background: var(--charcoal);
+    border-top: 2px solid rgba(232,197,71,0.15);
+    padding-top: 4rem;
+  }
+  .buzos-section .product-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 
-  /* ══════════════════════════════
+    /* ── OVERLAY INFO ── */
+  .product-overlay {
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .overlay-info { width: 100%; }
+  .overlay-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    letter-spacing: 0.06em;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+    line-height: 1.1;
+  }
+  .overlay-desc {
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+    /* ══════════════════════════════
      RESPONSIVE
   ══════════════════════════════ */
 
   /* Tablet landscape — ocultar nav links */
   @media (max-width: 1024px) {
-    .product-grid, .buzo-grid { grid-template-columns: repeat(4, 1fr); }
+    .product-grid, .buzos-section .product-grid { grid-template-columns: repeat(4, 1fr); }
     .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     .footer-brand { grid-column: 1 / -1; }
   }
@@ -221,7 +250,7 @@
     .nav-cta { display: none; }
     .nav-burger { display: flex; }
     .tech-grid { grid-template-columns: repeat(2, 1fr); }
-    .product-grid, .buzo-grid { grid-template-columns: repeat(3, 1fr); }
+    .product-grid, .buzos-section .product-grid { grid-template-columns: repeat(3, 1fr); }
     .custom { gap: 3rem; }
   }
 
@@ -229,7 +258,7 @@
   @media (max-width: 768px) {
     nav { padding: 0.9rem 1.25rem; }
     .techniques, .products, .custom { padding: 4rem 1.5rem; }
-    .product-grid, .buzo-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .product-grid, .buzos-section .product-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
     .custom { grid-template-columns: 1fr; gap: 2.5rem; }
     .custom-visual { justify-content: stretch; }
     .footer-main { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; gap: 2rem; }
@@ -248,7 +277,7 @@
     .techniques, .products, .custom { padding: 3rem 1rem; }
     .tech-grid { grid-template-columns: 1fr; }
     .tech-card { padding: 1.4rem 1.2rem; }
-    .product-grid, .buzo-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .product-grid, .buzos-section .product-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
     .products-header { flex-direction: column; align-items: flex-start; }
     .products-header .btn-ghost { font-size: 0.72rem; padding: 0.6rem 1rem; width: 100%; text-align: center; }
     .wsp-btn { width: 100%; justify-content: center; font-size: 0.78rem; }
@@ -261,7 +290,7 @@
   /* Very small — iPhone SE, Galaxy A serie chica */
   @media (max-width: 380px) {
     .hero h1 { font-size: 3.2rem; }
-    .product-grid, .buzo-grid { grid-template-columns: 1fr; }
+    .product-grid, .buzos-section .product-grid { grid-template-columns: 1fr; }
     .hero-btns { flex-direction: column; align-items: center; }
     .btn-primary, .btn-ghost { width: 100%; text-align: center; }
   }
@@ -281,6 +310,7 @@
   <ul class="nav-links">
     <li><a href="#productos">Productos</a></li>
     <li><a href="#tecnicas">Técnicas</a></li>
+    <li><a href="#buzos">Buzos</a></li>
     <li><a href="#personalizado">Personalizado</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -294,6 +324,7 @@
 <div class="nav-mobile" id="mob-menu" role="navigation" aria-label="Menú principal">
   <a href="#productos" class="mob-link">Productos</a>
   <a href="#tecnicas" class="mob-link">Técnicas</a>
+  <a href="#buzos" class="mob-link">Buzos</a>
   <a href="#personalizado" class="mob-link">Personalizado</a>
   <a href="#contacto" class="mob-link">Contacto</a>
   <a href="https://wa.me/3834586038?text=Hola!%20Quiero%20hacer%20un%20pedido" class="mob-cta" target="_blank">Pedir por WhatsApp</a>
@@ -332,99 +363,180 @@
   </div>
 </section>
 
-<!-- PRODUCTOS -->
+<!-- REMERAS -->
 <section class="products" id="productos">
   <div class="products-header">
-    <div><div class="section-label">Catálogo</div><h2>Nuestros Productos</h2></div>
+    <div>
+      <div class="section-label">Catálogo</div>
+      <h2>Remeras Estampadas</h2>
+    </div>
     <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20hacer%20una%20consulta!" class="btn-ghost" target="_blank">Consultar por WSP →</a>
   </div>
   <div class="product-grid">
-
     <div class="product-card">
-      <img src="/1.jpeg" alt="Remera Animal Print 1" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%201" target="_blank">Consultar</a></div>
+      <img src="/1.jpeg" alt="Maradona Pelota" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Maradona Pelota</h3>
+          <p class="overlay-desc">Estampa DTF · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Maradona%20Pelota%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/2.jpeg" alt="Remera Animal Print 2" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%202" target="_blank">Consultar</a></div>
+      <img src="/2.jpeg" alt="Alpinestars Neón" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Alpinestars Neón</h3>
+          <p class="overlay-desc">Logo fluo amarillo · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Alpinestars%20Neón%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/3.jpeg" alt="Remera Animal Print 3" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%203" target="_blank">Consultar</a></div>
+      <img src="/3.jpeg" alt="Maradona Gafas" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Maradona Gafas</h3>
+          <p class="overlay-desc">Ilustración B&N · Algodón premium · Blanco</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Maradona%20Gafas%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/4.jpeg" alt="Remera Animal Print 4" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%204" target="_blank">Consultar</a></div>
+      <img src="/4.jpeg" alt="Vans Sketch" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Vans Sketch</h3>
+          <p class="overlay-desc">Estampa sketch · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Vans%20Sketch%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/5.jpeg" alt="Remera Animal Print 5" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%205" target="_blank">Consultar</a></div>
+      <img src="/5.jpeg" alt="Malvinas Flag" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Malvinas Flag</h3>
+          <p class="overlay-desc">Estampa color · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Malvinas%20Flag%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/6.jpeg" alt="Remera Animal Print 6" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%206" target="_blank">Consultar</a></div>
+      <img src="/6.jpeg" alt="Red Hot Chili Peppers" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Red Hot Chili Peppers</h3>
+          <p class="overlay-desc">Banda de rock · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Red%20Hot%20Chili%20Peppers%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/7.jpeg" alt="Remera Animal Print 7" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%207" target="_blank">Consultar</a></div>
+      <img src="/7.jpeg" alt="Naruto" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Naruto</h3>
+          <p class="overlay-desc">Anime · Estampa B&N · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Naruto%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/8.jpeg" alt="Remera Animal Print 8" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%208" target="_blank">Consultar</a></div>
+      <img src="/8.jpeg" alt="Crash Bandicoot" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Crash Bandicoot</h3>
+          <p class="overlay-desc">Personaje color · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Crash%20Bandicoot%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/9.jpeg" alt="Remera Animal Print 9" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%209" target="_blank">Consultar</a></div>
+      <img src="/9.jpeg" alt="Thrasher Color" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Thrasher Color</h3>
+          <p class="overlay-desc">Logo multicolor · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Thrasher%20Color%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
     <div class="product-card">
-      <img src="/10.jpeg" alt="Remera Animal Print 10" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%2010" target="_blank">Consultar</a></div>
+      <img src="/10.jpeg" alt="Malvinas Grande" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Malvinas Grande</h3>
+          <p class="overlay-desc">Estampa oversize · Algodón premium · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Malvinas%20Grande%22" target="_blank">Consultar</a>
+        </div>
+      </div>
     </div>
-
-
-  <!-- BUZOS -->
-  <div class="products-subheader">
-    <div class="section-label">También trabajamos</div>
-    <h3 class="products-sub-title">Buzos Personalizados</h3>
   </div>
-  <div class="product-grid buzo-grid">
+</section>
 
-    <div class="product-card">
-      <img src="/buzo1.jpeg" alt="Buzo Animal Print 1" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%201" target="_blank">Consultar</a></div>
+<!-- BUZOS -->
+<section class="products buzos-section" id="buzos">
+  <div class="products-header">
+    <div>
+      <div class="section-label">También hacemos</div>
+      <h2>Buzos Personalizados</h2>
     </div>
-
-    <div class="product-card">
-      <img src="/buzo2.jpeg" alt="Buzo Animal Print 2" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%202" target="_blank">Consultar</a></div>
-    </div>
-
-    <div class="product-card">
-      <img src="/buzo3.jpeg" alt="Buzo Animal Print 3" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%203" target="_blank">Consultar</a></div>
-    </div>
-
-    <div class="product-card">
-      <img src="/buzo4.jpeg" alt="Buzo Animal Print 4" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%204" target="_blank">Consultar</a></div>
-    </div>
-
-    <div class="product-card">
-      <img src="/buzo5.jpeg" alt="Buzo Animal Print 5" loading="lazy">
-      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%205" target="_blank">Consultar</a></div>
-    </div>
-
+    <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20buzos!" class="btn-ghost" target="_blank">Consultar por WSP →</a>
   </div>
-
+  <div class="product-grid">
+    <div class="product-card">
+      <img src="/buzo1.jpeg" alt="Maradona N°10" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Maradona N°10</h3>
+          <p class="overlay-desc">Estampa espalda · Buzo con capucha · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Maradona%20N°10%22" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="/buzo2.jpeg" alt="DIOS Diego" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">DIOS Diego</h3>
+          <p class="overlay-desc">Estampa pecho · Buzo con capucha · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22DIOS%20Diego%22" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="/buzo3.jpeg" alt="Vans Sketch Hood" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Vans Sketch Hood</h3>
+          <p class="overlay-desc">Logo sketch · Buzo con capucha · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Sketch%20Hood%22" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="/buzo4.jpeg" alt="Vans Classic Hood" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Vans Classic Hood</h3>
+          <p class="overlay-desc">Logo clásico · Buzo con capucha · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Classic%20Hood%22" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+    <div class="product-card">
+      <img src="/buzo5.jpeg" alt="Vans Off The Wall" loading="lazy">
+      <div class="product-overlay">
+        <div class="overlay-info">
+          <h3 class="overlay-name">Vans Off The Wall</h3>
+          <p class="overlay-desc">Logo vintage · Buzo con capucha · Negro</p>
+          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Off%20The%20Wall%22" target="_blank">Consultar</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PERSONALIZADO -->
