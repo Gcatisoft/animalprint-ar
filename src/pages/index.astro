@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animal Print · Remeras Estampadas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --charcoal: #111111;
+    --dark: #1a1a1a;
+    --card: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --accent: #e8c547;
+    --text: #f0ece4;
+    --muted: #888880;
+  }
+
+  /* ── RESET ── */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body { background: var(--black); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; min-width: 320px; }
+  img { display: block; max-width: 100%; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border); gap: 1rem;
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 0.1em; color: var(--accent); text-decoration: none; flex-shrink: 0; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+  .nav-links a { color: var(--muted); font-size: 0.78rem; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; white-space: nowrap; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { background: var(--accent); color: var(--black); padding: 0.5rem 1.2rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s; white-space: nowrap; flex-shrink: 0; }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* hamburger */
+  .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 6px; flex-shrink: 0; }
+  .nav-burger span { display: block; height: 1.5px; background: var(--text); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
+  .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-burger.open span:nth-child(2) { opacity: 0; }
+  .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* mobile menu */
+  .nav-mobile {
+    display: none; position: fixed; top: 57px; left: 0; right: 0; z-index: 190;
+    background: rgba(10,10,10,0.99);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column; padding: 0 1.5rem;
+  }
+  .nav-mobile.open { display: flex; }
+  .nav-mobile a { color: var(--muted); font-size: 0.9rem; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; padding: 1rem 0; border-bottom: 1px solid var(--border); transition: color 0.2s; display: block; }
+  .nav-mobile a:last-child { border-bottom: none; }
+  .nav-mobile a:hover, .nav-mobile a:active { color: var(--accent); }
+  .nav-mobile .mob-cta { margin: 1rem 0; background: var(--accent); color: var(--black); text-align: center; padding: 0.9rem; font-weight: 500; border-bottom: none !important; border: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100svh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 7rem 1.5rem 5rem; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,197,71,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 80%, rgba(212,79,30,0.06) 0%, transparent 50%);
+  }
+  .hero-tag { display: inline-block; border: 1px solid rgba(232,197,71,0.4); color: var(--accent); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.4rem 0.9rem; margin-bottom: 1.5rem; }
+  .hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.8rem, 18vw, 12rem); line-height: 0.88; letter-spacing: 0.03em; color: var(--text); }
+  .hero h1 span { color: var(--accent); }
+  .hero-sub { max-width: 420px; color: var(--muted); font-size: clamp(0.85rem, 2.5vw, 1rem); line-height: 1.7; margin: 1.5rem auto 2rem; }
+  .hero-btns { display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { background: var(--accent); color: var(--black); padding: 0.85rem 1.75rem; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: transform 0.2s, opacity 0.2s; display: inline-block; white-space: nowrap; touch-action: manipulation; }
+  .btn-primary:hover { transform: translateY(-2px); opacity: 0.9; }
+  .btn-ghost { border: 1px solid var(--border); color: var(--text); padding: 0.85rem 1.75rem; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: border-color 0.2s; display: inline-block; white-space: nowrap; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.3); }
+  .hero-scroll { position: absolute; bottom: 1.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 30px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 1.8s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  /* ── MARQUEE ── */
+  .marquee-strip { overflow: hidden; background: var(--accent); padding: 0.6rem 0; }
+  .marquee-inner { display: flex; white-space: nowrap; animation: marquee 22s linear infinite; gap: 2.5rem; }
+  .marquee-inner span { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.15em; color: var(--black); flex-shrink: 0; }
+  .marquee-inner span.dot { color: rgba(0,0,0,0.3); font-size: 0.35rem; align-self: center; }
+  @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ── TECHNIQUES ── */
+  .techniques { padding: 5rem 2rem; background: var(--charcoal); border-top: 1px solid var(--border); }
+  .section-label { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.75rem; }
+  .techniques h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 7vw, 4rem); letter-spacing: 0.05em; margin-bottom: 2.5rem; }
+  .tech-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .tech-card { background: var(--charcoal); padding: 1.75rem 1.5rem; transition: background 0.25s; }
+  .tech-card:hover { background: var(--dark); }
+  .tech-num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: rgba(232,197,71,0.15); line-height: 1; margin-bottom: 0.6rem; }
+  .tech-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--accent); }
+  .tech-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+  /* ── PRODUCTS ── */
+  .products { padding: 5rem 2rem; background: var(--black); }
+  .products-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+  .products-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 7vw, 4rem); letter-spacing: 0.05em; }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 3px;
+  }
+  .product-card { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--card); cursor: pointer; }
+  .product-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); filter: brightness(0.8); }
+  .product-card:hover img { transform: scale(1.06); filter: brightness(0.6); }
+  .product-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.02) 50%, transparent 100%);
+    display: flex; align-items: flex-end; padding: 1rem;
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .product-card:hover .product-overlay { opacity: 1; }
+  .product-overlay a {
+    display: inline-block; border: 1px solid var(--accent); color: var(--accent);
+    padding: 0.45rem 1rem; font-size: 0.72rem; letter-spacing: 0.07em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .product-overlay a:hover, .product-overlay a:active { background: var(--accent); color: var(--black); }
+
+  /* touch: overlay siempre visible */
+  @media (hover: none) {
+    .product-overlay { opacity: 1; }
+    .product-card img { filter: brightness(0.65); }
+  }
+
+  /* ── CUSTOM / PERSONALIZADO ── */
+  .custom { padding: 5rem 2rem; background: var(--charcoal); border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .custom-text .section-label { margin-bottom: 0.75rem; }
+  .custom-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: 0.05em; line-height: 1; margin-bottom: 1.2rem; }
+  .custom-text h2 em { font-style: normal; color: var(--accent); }
+  .custom-text p { color: var(--muted); font-size: 0.9rem; line-height: 1.75; margin-bottom: 1.5rem; }
+  .custom-features { list-style: none; margin-bottom: 2rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .custom-features li { display: flex; align-items: flex-start; gap: 0.65rem; font-size: 0.83rem; color: var(--text); line-height: 1.4; }
+  .custom-features li::before { content: '→'; color: var(--accent); font-weight: 500; flex-shrink: 0; margin-top: 0.05rem; }
+  .wsp-btn { display: inline-flex; align-items: center; gap: 0.65rem; background: #25d366; color: #fff; padding: 0.9rem 1.75rem; font-size: 0.82rem; font-weight: 500; letter-spacing: 0.05em; text-decoration: none; transition: opacity 0.2s; text-transform: uppercase; touch-action: manipulation; }
+  .wsp-btn:hover { opacity: 0.88; }
+  .wsp-btn svg { flex-shrink: 0; }
+  .custom-visual { display: flex; align-items: flex-start; justify-content: center; }
+  .visual-box { width: 100%; border: 1px solid var(--border); padding: 2rem 1.75rem; background: var(--dark); position: relative; }
+  .visual-box::before { content: ''; position: absolute; top: -1px; left: 1.5rem; right: 1.5rem; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); }
+  .vb-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 1.25rem; }
+  .vb-field { margin-bottom: 1rem; }
+  .vb-label { display: block; font-size: 0.67rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+  .vb-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: var(--text); padding: 0.7rem 0.9rem; font-size: 0.88rem; font-family: inherit; outline: none; transition: border-color 0.2s; border-radius: 0; -webkit-appearance: none; }
+  .vb-input:focus { border-color: rgba(232,197,71,0.5); }
+  .vb-input::placeholder { color: var(--muted); }
+  select.vb-input { cursor: pointer; }
+  .vb-submit { width: 100%; background: var(--accent); color: var(--black); border: none; padding: 0.85rem; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; margin-top: 0.5rem; font-family: inherit; -webkit-appearance: none; touch-action: manipulation; min-height: 44px; }
+  .vb-submit:hover { opacity: 0.85; }
+  .vb-submit:active { opacity: 0.7; }
+
+  /* ── FOOTER ── */
+  footer { background: var(--charcoal); border-top: 1px solid var(--border); }
+  .footer-main { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 3rem; padding: 3.5rem 2rem; border-bottom: 1px solid var(--border); }
+
+  .footer-brand-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--accent); letter-spacing: 0.1em; line-height: 1; margin-bottom: 0.75rem; display: block; text-decoration: none; }
+  .footer-brand-tagline { font-size: 0.8rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+  .footer-social-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .footer-social-row a { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; transition: border-color 0.25s, color 0.25s, background 0.25s; flex-shrink: 0; }
+  .footer-social-row a:hover { border-color: var(--accent); color: var(--accent); }
+  .footer-social-row a.wa:hover { border-color: #25d366; color: #25d366; }
+
+  .footer-col h4 { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.2em; color: var(--text); margin-bottom: 1.1rem; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul li a { color: var(--muted); font-size: 0.8rem; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--accent); }
+
+  .footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .footer-contact-list li { display: flex; align-items: flex-start; gap: 0.6rem; }
+  .footer-contact-list li svg { flex-shrink: 0; margin-top: 2px; opacity: 0.5; }
+  .footer-contact-list li a, .footer-contact-list li span { color: var(--muted); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; line-height: 1.5; }
+  .footer-contact-list li a:hover { color: var(--accent); }
+
+  .footer-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+  .badge { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.65rem; border: 1px solid var(--border); color: var(--muted); }
+
+  .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2rem; flex-wrap: wrap; gap: 0.75rem; }
+  .footer-copy { font-size: 0.73rem; color: var(--muted); }
+  .footer-copy strong { color: var(--accent); font-weight: 500; }
+  .footer-devhub { font-size: 0.73rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; text-decoration: none; transition: color 0.2s; }
+  .footer-devhub:hover { color: var(--text); }
+  .footer-devhub-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+
+  /* ── FLOATING WSP ── */
+  .float-wsp { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 300; width: 52px; height: 52px; background: #25d366; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s; touch-action: manipulation; border-radius: 50%; }
+  .float-wsp:hover { transform: scale(1.08); }
+
+  /* ══════════════════════════════
+     RESPONSIVE
+  ══════════════════════════════ */
+
+  /* Tablet landscape — ocultar nav links */
+  @media (max-width: 1024px) {
+    .product-grid { grid-template-columns: repeat(4, 1fr); grid-template-rows: auto; }
+    .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .footer-brand { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-burger { display: flex; }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
+    .custom { gap: 3rem; }
+  }
+
+  /* Tablet portrait */
+  @media (max-width: 768px) {
+    nav { padding: 0.9rem 1.25rem; }
+    .techniques, .products, .custom { padding: 4rem 1.5rem; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .custom { grid-template-columns: 1fr; gap: 2.5rem; }
+    .custom-visual { justify-content: stretch; }
+    .footer-main { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; gap: 2rem; }
+    .footer-brand { grid-column: 1 / -1; }
+    .footer-bottom { padding: 1rem 1.5rem; }
+  }
+
+  /* Mobile */
+  @media (max-width: 520px) {
+    nav { padding: 0.8rem 1rem; }
+    .nav-logo { font-size: 1.45rem; }
+    .hero { padding: 6rem 1rem 4rem; }
+    .hero-tag { font-size: 0.58rem; letter-spacing: 0.14em; }
+    .hero-sub { font-size: 0.85rem; padding: 0 0.5rem; }
+    .btn-primary, .btn-ghost { padding: 0.8rem 1.3rem; font-size: 0.78rem; }
+    .techniques, .products, .custom { padding: 3rem 1rem; }
+    .tech-grid { grid-template-columns: 1fr; }
+    .tech-card { padding: 1.4rem 1.2rem; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 2px; }
+    .products-header { flex-direction: column; align-items: flex-start; }
+    .products-header .btn-ghost { font-size: 0.72rem; padding: 0.6rem 1rem; width: 100%; text-align: center; }
+    .wsp-btn { width: 100%; justify-content: center; font-size: 0.78rem; }
+    .float-wsp { width: 48px; height: 48px; bottom: 1rem; right: 1rem; }
+    .footer-main { grid-template-columns: 1fr; padding: 2.5rem 1rem; gap: 2rem; }
+    .footer-brand { grid-column: auto; }
+    .footer-bottom { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+
+  /* Very small — iPhone SE, Galaxy A serie chica */
+  @media (max-width: 380px) {
+    .hero h1 { font-size: 3.2rem; }
+    .product-grid { grid-template-columns: 1fr; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; }
+  }
+
+  /* Landscape móvil */
+  @media (max-height: 500px) and (orientation: landscape) {
+    .hero { min-height: auto; padding: 5rem 1.5rem 3rem; }
+    .hero h1 { font-size: clamp(2.5rem, 10vw, 5rem); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Animal Print</a>
+  <ul class="nav-links">
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#tecnicas">Técnicas</a></li>
+    <li><a href="#personalizado">Personalizado</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/3834586038?text=Hola!%20Quiero%20hacer%20un%20pedido" class="nav-cta" target="_blank">Pedir por WSP</a>
+  <button class="nav-burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="nav-mobile" id="mob-menu" role="navigation" aria-label="Menú principal">
+  <a href="#productos" class="mob-link">Productos</a>
+  <a href="#tecnicas" class="mob-link">Técnicas</a>
+  <a href="#personalizado" class="mob-link">Personalizado</a>
+  <a href="#contacto" class="mob-link">Contacto</a>
+  <a href="https://wa.me/3834586038?text=Hola!%20Quiero%20hacer%20un%20pedido" class="mob-cta" target="_blank">Pedir por WhatsApp</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">Remeras · Estampas · Personalización</div>
+  <h1>ANIMAL<br><span>PRINT</span></h1>
+  <p class="hero-sub">Estampado premium con técnicas DTF, sublimación, serigrafía y vinilo. Diseños únicos para marcas, eventos y merchandising.</p>
+  <div class="hero-btns">
+    <a href="#productos" class="btn-primary">Ver Productos</a>
+    <a href="#personalizado" class="btn-ghost">Pedir Personalizado</a>
+  </div>
+  <div class="hero-scroll" aria-hidden="true"><div class="scroll-line"></div><span>Scroll</span></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>DTF</span><span class="dot">●</span><span>Sublimación</span><span class="dot">●</span><span>Serigrafía</span><span class="dot">●</span><span>Vinilo</span><span class="dot">●</span><span>Personalizado</span><span class="dot">●</span><span>Alta Calidad</span><span class="dot">●</span><span>Envíos</span><span class="dot">●</span><span>Marcas &amp; Eventos</span><span class="dot">●</span>
+    <span>DTF</span><span class="dot">●</span><span>Sublimación</span><span class="dot">●</span><span>Serigrafía</span><span class="dot">●</span><span>Vinilo</span><span class="dot">●</span><span>Personalizado</span><span class="dot">●</span><span>Alta Calidad</span><span class="dot">●</span><span>Envíos</span><span class="dot">●</span><span>Marcas &amp; Eventos</span><span class="dot">●</span>
+  </div>
+</div>
+
+<!-- TÉCNICAS -->
+<section class="techniques" id="tecnicas">
+  <div class="section-label">Nuestros Métodos</div>
+  <h2>Técnicas de Estampado</h2>
+  <div class="tech-grid">
+    <div class="tech-card"><div class="tech-num">01</div><h3>DTF</h3><p>Direct To Film. Ideal para algodón. Alta resolución de color, detalles finos y máxima durabilidad.</p></div>
+    <div class="tech-card"><div class="tech-num">02</div><h3>Sublimación</h3><p>Para poliéster. El diseño se integra a la tela, colores vibrantes que no se descascarillan ni desvanecen.</p></div>
+    <div class="tech-card"><div class="tech-num">03</div><h3>Serigrafía</h3><p>Técnica clásica de alta calidad para tiradas. Tintas especiales, acabado premium y textura única.</p></div>
+    <div class="tech-card"><div class="tech-num">04</div><h3>Vinilo</h3><p>Transferencia de vinilo termoadhesivo. Perfecto para textos, logos y diseños con bordes nítidos.</p></div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="products" id="productos">
+  <div class="products-header">
+    <div><div class="section-label">Catálogo</div><h2>Nuestros Productos</h2></div>
+    <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20hacer%20una%20consulta!" class="btn-ghost" target="_blank">Consultar por WSP →</a>
+  </div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <img src="/1.jpeg" alt="Remera Animal Print 1" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%201" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/2.jpeg" alt="Remera Animal Print 2" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%202" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/3.jpeg" alt="Remera Animal Print 3" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%203" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/4.jpeg" alt="Remera Animal Print 4" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%204" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/5.jpeg" alt="Remera Animal Print 5" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%205" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/6.jpeg" alt="Remera Animal Print 6" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%206" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/7.jpeg" alt="Remera Animal Print 7" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%207" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/8.jpeg" alt="Remera Animal Print 8" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%208" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/9.jpeg" alt="Remera Animal Print 9" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%209" target="_blank">Consultar</a></div>
+    </div>
+
+    <div class="product-card">
+      <img src="/10.jpeg" alt="Remera Animal Print 10" loading="lazy">
+      <div class="product-overlay"><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20foto%2010" target="_blank">Consultar</a></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PERSONALIZADO -->
+<section class="custom" id="personalizado">
+  <div class="custom-text">
+    <div class="section-label">Diseño a Medida</div>
+    <h2>Hacé tu remera <em>personalizada</em></h2>
+    <p>Mandanos tu diseño o cuéntanos tu idea. Trabajamos con cualquier cantidad, desde unidades sueltas hasta tiradas de producción para eventos o uniformes de empresa.</p>
+    <ul class="custom-features">
+      <li>Tu logo o diseño en cualquier técnica</li>
+      <li>Asesoramiento gratuito sobre el mejor método</li>
+      <li>Colores ilimitados con DTF y sublimación</li>
+      <li>Envíos a todo el país</li>
+      <li>Respuesta rápida por WhatsApp</li>
+    </ul>
+    <a href="https://wa.me/3834586038?text=Hola!%20Quiero%20hacer%20una%20remera%20personalizada.%20Mi%20consulta%20es:" class="wsp-btn" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Contactar por WhatsApp
+    </a>
+  </div>
+  <div class="custom-visual" id="contacto">
+    <div class="visual-box">
+      <div class="vb-title">Cotizá tu pedido</div>
+      <div class="vb-field">
+        <label class="vb-label" for="inp-nombre">Tu nombre</label>
+        <input type="text" class="vb-input" placeholder="Ej: María García" id="inp-nombre" autocomplete="name">
+      </div>
+      <div class="vb-field">
+        <label class="vb-label" for="inp-tecnica">Técnica preferida</label>
+        <select class="vb-input" id="inp-tecnica">
+          <option value="">Seleccioná...</option>
+          <option>DTF (algodón)</option>
+          <option>Sublimación (poliéster)</option>
+          <option>Serigrafía</option>
+          <option>Vinilo</option>
+          <option>No sé, necesito asesoramiento</option>
+        </select>
+      </div>
+      <div class="vb-field">
+        <label class="vb-label" for="inp-cantidad">Cantidad de unidades</label>
+        <input type="text" class="vb-input" placeholder="Ej: 50 remeras" id="inp-cantidad" inputmode="numeric">
+      </div>
+      <div class="vb-field">
+        <label class="vb-label" for="inp-idea">Contanos tu idea</label>
+        <textarea class="vb-input" rows="3" placeholder="Describí el diseño o mandá foto por WSP..." id="inp-idea" style="resize:vertical;min-height:80px;"></textarea>
+      </div>
+      <button class="vb-submit" onclick="enviarWSP()">Enviar por WhatsApp →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+
+    <div class="footer-brand">
+      <a href="#" class="footer-brand-logo">Animal Print</a>
+      <p class="footer-brand-tagline">Remeras estampadas con identidad. Diseños únicos para marcas, eventos y personas que quieren destacarse.</p>
+      <div class="footer-social-row">
+        <a href="https://instagram.com/_animal.print" target="_blank" aria-label="Instagram" class="ig">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="https://wa.me/3834586038" target="_blank" aria-label="WhatsApp" class="wa">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#productos">Productos</a></li>
+        <li><a href="#tecnicas">Técnicas</a></li>
+        <li><a href="#personalizado">Pedido personalizado</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#personalizado">Estampado DTF</a></li>
+        <li><a href="#personalizado">Sublimación total</a></li>
+        <li><a href="#personalizado">Serigrafía</a></li>
+        <li><a href="#personalizado">Vinilo termoadhesivo</a></li>
+        <li><a href="#personalizado">Merchandising</a></li>
+        <li><a href="#personalizado">Uniformes corporativos</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <ul class="footer-contact-list">
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.86 9.82 19.79 19.79 0 01.79 1.18 2 2 0 012.77 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.09a16 16 0 006.29 6.29l.91-.91a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          <a href="https://wa.me/3834586038" target="_blank">+54 9 383 458-6038</a>
+        </li>
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:contacto@animalprintok.com">contacto@animalprintok.com</a>
+        </li>
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Lun–Vie 9:00 a 18:00 hs<br>Sáb 9:00 a 13:00 hs</span>
+        </li>
+        <li>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Argentina · Envíos a todo el país</span>
+        </li>
+      </ul>
+      <div class="footer-badges">
+        <span class="badge">DTF</span>
+        <span class="badge">Sublimación</span>
+        <span class="badge">Serigrafía</span>
+        <span class="badge">Vinilo</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 <strong>Animal Print</strong>. Todos los derechos reservados.</p>
+    <a href="#" class="footer-devhub">
+      <span class="footer-devhub-dot"></span>
+      Desarrollado por <strong style="color:var(--text);font-weight:500;margin-left:0.2rem;">DevHub</strong>
+    </a>
+  </div>
+</footer>
+
+<!-- FLOTANTE WSP -->
+<a href="https://wa.me/3834586038?text=Hola!%20Quiero%20hacer%20un%20pedido" class="float-wsp" target="_blank" aria-label="Contactar por WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* ── Menú hamburguesa ── */
+const burger = document.getElementById('burger');
+const mobMenu = document.getElementById('mob-menu');
+
+function closeMenu() {
+  mobMenu.classList.remove('open');
+  burger.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+burger.addEventListener('click', () => {
+  const open = mobMenu.classList.toggle('open');
+  burger.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+document.querySelectorAll('.mob-link, .mob-cta').forEach(el => el.addEventListener('click', closeMenu));
+
+document.addEventListener('click', e => {
+  if (mobMenu.classList.contains('open') && !mobMenu.contains(e.target) && !burger.contains(e.target)) {
+    closeMenu();
+  }
+});
+
+/* cerrar con Escape */
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+/* ── Formulario WSP ── */
+function enviarWSP() {
+  const n = document.getElementById('inp-nombre').value.trim();
+  const t = document.getElementById('inp-tecnica').value;
+  const c = document.getElementById('inp-cantidad').value.trim();
+  const i = document.getElementById('inp-idea').value.trim();
+  const msg =
+    'Hola! Me llamo ' + (n || '(sin nombre)') + ' y quiero cotizar un pedido.' +
+    '\nTécnica: ' + (t || 'sin especificar') +
+    '\nCantidad: ' + (c || 'sin especificar') +
+    '\nDescripción: ' + (i || 'sin descripción');
+  window.open('https://wa.me/3834586038?text=' + encodeURIComponent(msg), '_blank');
+}
+</script>
+</body>
+</html>
