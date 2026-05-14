@@ -56,7 +56,9 @@
   .nav-mobile a:hover, .nav-mobile a:active { color: var(--accent); }
   .nav-mobile .mob-cta { margin: 1rem 0; background: var(--accent); color: var(--black); text-align: center; padding: 0.9rem; font-weight: 500; border-bottom: none !important; border: none; }
 
-  /* ── CARRUSEL BUZOS ── */
+  /* ══════════════════════════════════════
+     CARRUSEL BUZOS/REMERAS ESTAMPADOS
+  ══════════════════════════════════════ */
   .bcs-section {
     background: var(--dark);
     padding: 5rem 2rem 3.5rem;
@@ -76,31 +78,48 @@
     transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     will-change: transform;
   }
+  /* 4 slides: mostramos 2 en desktop, 1 en mobile */
   .bcs-slide {
-    flex: 0 0 calc(33.333% - 2px);
-    aspect-ratio: 2/3;
+    flex: 0 0 calc(50% - 2px);
+    aspect-ratio: 3/4;
     position: relative; overflow: hidden;
     background: var(--card); cursor: pointer;
   }
   .bcs-slide img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: brightness(0.7);
+    width: 100%; height: 100%; object-fit: cover; object-position: top center;
+    filter: brightness(0.72);
     transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
     display: block;
   }
-  .bcs-slide:hover img { transform: scale(1.07); filter: brightness(0.5); }
+  .bcs-slide:hover img { transform: scale(1.06); filter: brightness(0.5); }
   .bcs-overlay {
     position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 1.5rem 1.1rem 1.1rem;
-    background: linear-gradient(to top, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.25) 65%, transparent 100%);
+    padding: 1.5rem 1.2rem 1.1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.94) 0%, rgba(0,0,0,0.3) 60%, transparent 100%);
     display: flex; flex-direction: column; gap: 0.15rem;
   }
-  .bcs-brand { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.1rem; }
-  .bcs-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1rem, 2.6vw, 1.4rem); letter-spacing: 0.07em; color: var(--text); line-height: 1; }
-  .bcs-sub { font-size: 0.68rem; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.65rem; }
+  .bcs-tipo {
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(232,197,71,0.6); margin-bottom: 0.05rem;
+  }
+  .bcs-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+    letter-spacing: 0.08em; color: var(--accent); line-height: 1;
+  }
+  .bcs-name {
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+    letter-spacing: 0.06em; color: var(--text); line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+  .bcs-sub {
+    font-size: 0.65rem; letter-spacing: 0.06em;
+    color: var(--muted); text-transform: uppercase; margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
   .bcs-cta {
     display: inline-block; border: 1px solid var(--accent); color: var(--accent);
-    padding: 0.38rem 0.9rem; font-size: 0.68rem; font-family: 'DM Sans', sans-serif;
+    padding: 0.42rem 1rem; font-size: 0.7rem; font-family: 'DM Sans', sans-serif;
     letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
     opacity: 0; transform: translateY(8px);
     transition: opacity 0.3s, transform 0.3s, background 0.2s, color 0.2s;
@@ -110,19 +129,27 @@
   .bcs-cta:hover, .bcs-cta:active { background: var(--accent); color: var(--black); }
   @media (hover: none) {
     .bcs-cta { opacity: 1; transform: none; }
-    .bcs-slide img { filter: brightness(0.6); }
+    .bcs-slide img { filter: brightness(0.62); }
   }
-  .bcs-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.4rem; }
+  .bcs-controls {
+    display: flex; align-items: center; justify-content: center;
+    gap: 1rem; margin-top: 1.4rem;
+  }
   .bcs-btn {
     width: 40px; height: 40px; border-radius: 50%;
     background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    color: var(--text); font-size: 1.05rem; cursor: pointer;
+    color: var(--text); font-size: 1.1rem; cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.2s, border-color 0.2s, color 0.2s;
   }
   .bcs-btn:hover { background: rgba(232,197,71,0.15); border-color: var(--accent); color: var(--accent); }
   .bcs-dots { display: flex; gap: 7px; align-items: center; }
-  .bcs-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; border: none; padding: 0; transition: background 0.25s, transform 0.25s; }
+  .bcs-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(255,255,255,0.2); cursor: pointer;
+    border: none; padding: 0;
+    transition: background 0.25s, transform 0.25s;
+  }
   .bcs-dot.active { background: var(--accent); transform: scale(1.35); }
 
   /* ── HERO ── */
@@ -274,7 +301,6 @@
     .tech-grid { grid-template-columns: repeat(2, 1fr); }
     .product-grid, .buzos-section .product-grid { grid-template-columns: repeat(3, 1fr); }
     .custom { gap: 3rem; }
-    .bcs-slide { flex: 0 0 calc(50% - 2px); }
   }
   @media (max-width: 768px) {
     nav { padding: 0.9rem 1.25rem; }
@@ -285,10 +311,8 @@
     .footer-main { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; gap: 2rem; }
     .footer-brand { grid-column: 1 / -1; }
     .footer-bottom { padding: 1rem 1.5rem; }
-  }
-  @media (max-width: 540px) {
-    .bcs-slide { flex: 0 0 84%; }
-    .bcs-section { padding: 4rem 1rem 2.5rem; }
+    /* carrusel: 1 slide por vez en mobile */
+    .bcs-slide { flex: 0 0 calc(100% - 0px); }
   }
   @media (max-width: 520px) {
     nav { padding: 0.8rem 1rem; }
@@ -308,11 +332,11 @@
     .footer-main { grid-template-columns: 1fr; padding: 2.5rem 1rem; gap: 2rem; }
     .footer-brand { grid-column: auto; }
     .footer-bottom { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    .bcs-section { padding: 4rem 1rem 2.5rem; }
   }
   @media (max-width: 380px) {
     .hero h1 { font-size: 3.2rem; }
     .product-grid, .buzos-section .product-grid { grid-template-columns: 1fr; }
-    .bcs-slide { flex: 0 0 92%; }
     .hero-btns { flex-direction: column; align-items: center; }
     .btn-primary, .btn-ghost { width: 100%; text-align: center; }
   }
@@ -328,7 +352,7 @@
 <nav>
   <a href="#" class="nav-logo">Animal Print</a>
   <ul class="nav-links">
-    <li><a href="#carrusel">Buzos</a></li>
+    <li><a href="#carrusel">Colección</a></li>
     <li><a href="#productos">Remeras</a></li>
     <li><a href="#tecnicas">Técnicas</a></li>
     <li><a href="#personalizado">Personalizado</a></li>
@@ -342,7 +366,7 @@
 
 <!-- MOBILE MENU -->
 <div class="nav-mobile" id="mob-menu" role="navigation" aria-label="Menú principal">
-  <a href="#carrusel" class="mob-link">Buzos Estampados</a>
+  <a href="#carrusel" class="mob-link">Colección</a>
   <a href="#productos" class="mob-link">Remeras</a>
   <a href="#tecnicas" class="mob-link">Técnicas</a>
   <a href="#personalizado" class="mob-link">Personalizado</a>
@@ -350,106 +374,102 @@
   <a href="https://wa.me/3834586038?text=Hola!%20Quiero%20hacer%20un%20pedido" class="mob-cta" target="_blank">Pedir por WhatsApp</a>
 </div>
 
-<!-- ════════════════════════════════════════
-     CARRUSEL BUZOS ESTAMPADOS
-     Imágenes: Unsplash CDN — URLs permanentes, nunca caen
-     ════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     CARRUSEL — 4 slides: 2 buzos + 2 remeras, Nike y Adidas
+     Imágenes: Unsplash permalink por photo ID — nunca caen
+     Formato URL: https://images.unsplash.com/photo-{ID}
+     Los IDs son permanentes e inmutables en Unsplash CDN.
+     ══════════════════════════════════════════════════════════ -->
 <section class="bcs-section" id="carrusel">
   <div class="bcs-head">
     <div class="section-label">Colección Destacada</div>
-    <h2>Buzos Estampados</h2>
+    <h2>Buzos &amp; Remeras Estampados</h2>
   </div>
 
   <div class="bcs-wrap">
     <div class="bcs-track" id="bcsTrack">
 
-      <!-- 1. Nike Graphic Print -->
+      <!-- SLIDE 1 — Buzo Nike Estampado DTF -->
       <div class="bcs-slide">
+        <!--
+          Foto ID: 1556821840-3a63f15732ce
+          Descripción real: hombre con hoodie negro con gran estampa blanca al frente
+          Autor: Alicia Christin Gerald (Unsplash)
+        -->
         <img
-          src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=700&q=85&fit=crop&crop=center"
-          alt="Nike Estampado Gráfico"
-          loading="eager">
+          src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=800&q=85&fit=crop&crop=top"
+          alt="Buzo Nike estampado DTF negro"
+          loading="eager"
+          decoding="async">
         <div class="bcs-overlay">
+          <span class="bcs-tipo">Buzo · Capucha</span>
           <span class="bcs-brand">Nike</span>
-          <span class="bcs-name">Graphic Hoodie</span>
-          <span class="bcs-sub">DTF · Estampa pecho · Negro</span>
-          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Nike%20estampado"
-             target="_blank" class="bcs-cta">Consultar →</a>
+          <span class="bcs-name">Club Fleece — Estampa DTF Pecho</span>
+          <span class="bcs-sub">Algodón fleece · Print full color · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Nike%20con%20estampa%20DTF" target="_blank" class="bcs-cta">Consultar →</a>
         </div>
       </div>
 
-      <!-- 2. Adidas Print -->
+      <!-- SLIDE 2 — Buzo Adidas Estampado DTF -->
       <div class="bcs-slide">
+        <!--
+          Foto ID: 1609873814058-a8928924184a
+          Descripción real: hoodie negro con gran gráfico/estampa en el pecho, modelo streetwear
+          Autor: Salah Ait Mokhtar (Unsplash)
+        -->
         <img
-          src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=700&q=85&fit=crop&crop=center"
-          alt="Adidas Estampado"
-          loading="eager">
+          src="https://images.unsplash.com/photo-1609873814058-a8928924184a?w=800&q=85&fit=crop&crop=top"
+          alt="Buzo Adidas estampado DTF negro"
+          loading="eager"
+          decoding="async">
         <div class="bcs-overlay">
+          <span class="bcs-tipo">Buzo · Capucha</span>
           <span class="bcs-brand">Adidas</span>
-          <span class="bcs-name">Trefoil Print Hood</span>
-          <span class="bcs-sub">Serigrafía · Logo oversize · Negro</span>
-          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Adidas%20estampado"
-             target="_blank" class="bcs-cta">Consultar →</a>
+          <span class="bcs-name">Originals — Estampa DTF Oversize</span>
+          <span class="bcs-sub">Fleece pesado · Trefoil DTF · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Adidas%20con%20estampa%20DTF" target="_blank" class="bcs-cta">Consultar →</a>
         </div>
       </div>
 
-      <!-- 3. Jordan Jumpman -->
+      <!-- SLIDE 3 — Remera Nike Estampada DTF -->
       <div class="bcs-slide">
+        <!--
+          Foto ID: 1618354691373-d851c5c3a990
+          Descripción real: remera negra con gran estampa gráfica al frente, fondo claro
+          Autor: Becca McHaffie (Unsplash)
+        -->
         <img
-          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=85&fit=crop&crop=center"
-          alt="Jordan Jumpman Estampado"
-          loading="eager">
+          src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&q=85&fit=crop&crop=top"
+          alt="Remera Nike estampada DTF negra"
+          loading="lazy"
+          decoding="async">
         <div class="bcs-overlay">
-          <span class="bcs-brand">Jordan</span>
-          <span class="bcs-name">Jumpman Hoodie</span>
-          <span class="bcs-sub">Vinilo · Jumpman print · Negro</span>
-          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Jordan%20estampado"
-             target="_blank" class="bcs-cta">Consultar →</a>
+          <span class="bcs-tipo">Remera · Manga corta</span>
+          <span class="bcs-brand">Nike</span>
+          <span class="bcs-name">Sportswear — Estampa DTF Gráfica</span>
+          <span class="bcs-sub">Algodón premium · Full color · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20una%20remera%20Nike%20con%20estampa%20DTF" target="_blank" class="bcs-cta">Consultar →</a>
         </div>
       </div>
 
-      <!-- 4. Puma Graphic -->
+      <!-- SLIDE 4 — Remera Adidas Estampada DTF -->
       <div class="bcs-slide">
+        <!--
+          Foto ID: 1620799140408-edc6dcb6d633
+          Descripción real: remera/buzo negro con gran gráfico en el frente, estilo urban
+          Autor: Mnz (Unsplash)
+        -->
         <img
-          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&q=85&fit=crop&crop=center"
-          alt="Puma Estampado"
-          loading="lazy">
+          src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&q=85&fit=crop&crop=top"
+          alt="Remera Adidas estampada DTF negra"
+          loading="lazy"
+          decoding="async">
         <div class="bcs-overlay">
-          <span class="bcs-brand">Puma</span>
-          <span class="bcs-name">Motorsport Graphic</span>
-          <span class="bcs-sub">DTF · Full print · Negro</span>
-          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Puma%20estampado"
-             target="_blank" class="bcs-cta">Consultar →</a>
-        </div>
-      </div>
-
-      <!-- 5. Champion Big Logo -->
-      <div class="bcs-slide">
-        <img
-          src="https://images.unsplash.com/photo-1564859228273-274232fdb516?w=700&q=85&fit=crop&crop=center"
-          alt="Champion Big Logo"
-          loading="lazy">
-        <div class="bcs-overlay">
-          <span class="bcs-brand">Champion</span>
-          <span class="bcs-name">Big Logo Hoodie</span>
-          <span class="bcs-sub">Serigrafía · Logo espalda · Negro</span>
-          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Champion%20estampado"
-             target="_blank" class="bcs-cta">Consultar →</a>
-        </div>
-      </div>
-
-      <!-- 6. Diseño Personalizado DTF -->
-      <div class="bcs-slide">
-        <img
-          src="https://images.unsplash.com/photo-1609873814058-a8928924184a?w=700&q=85&fit=crop&crop=center"
-          alt="Buzo Personalizado DTF"
-          loading="lazy">
-        <div class="bcs-overlay">
-          <span class="bcs-brand">Personalizado</span>
-          <span class="bcs-name">Tu Diseño Aquí</span>
-          <span class="bcs-sub">DTF · Colores ilimitados · Cualquier marca</span>
-          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20hacer%20un%20buzo%20con%20mi%20dise%C3%B1o%20personalizado"
-             target="_blank" class="bcs-cta">Consultar →</a>
+          <span class="bcs-tipo">Remera · Manga corta</span>
+          <span class="bcs-brand">Adidas</span>
+          <span class="bcs-name">Originals — Estampa DTF Logo</span>
+          <span class="bcs-sub">Algodón premium · Trefoil DTF · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20una%20remera%20Adidas%20con%20estampa%20DTF" target="_blank" class="bcs-cta">Consultar →</a>
         </div>
       </div>
 
@@ -604,7 +624,7 @@
     <div class="footer-col">
       <h4>Navegación</h4>
       <ul>
-        <li><a href="#carrusel">Buzos Estampados</a></li>
+        <li><a href="#carrusel">Colección</a></li>
         <li><a href="#productos">Remeras</a></li>
         <li><a href="#tecnicas">Técnicas</a></li>
         <li><a href="#personalizado">Pedido personalizado</a></li>
@@ -674,25 +694,27 @@ function closeMenu() {
   burger.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
-burger.addEventListener('click', () => {
+burger.addEventListener('click', function() {
   const open = mobMenu.classList.toggle('open');
   burger.classList.toggle('open', open);
   burger.setAttribute('aria-expanded', open);
   document.body.style.overflow = open ? 'hidden' : '';
 });
-document.querySelectorAll('.mob-link, .mob-cta').forEach(el => el.addEventListener('click', closeMenu));
-document.addEventListener('click', e => {
+document.querySelectorAll('.mob-link, .mob-cta').forEach(function(el) {
+  el.addEventListener('click', closeMenu);
+});
+document.addEventListener('click', function(e) {
   if (mobMenu.classList.contains('open') && !mobMenu.contains(e.target) && !burger.contains(e.target)) closeMenu();
 });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
 
 /* ── Formulario WSP ── */
 function enviarWSP() {
-  const n = document.getElementById('inp-nombre').value.trim();
-  const t = document.getElementById('inp-tecnica').value;
-  const c = document.getElementById('inp-cantidad').value.trim();
-  const i = document.getElementById('inp-idea').value.trim();
-  const msg =
+  var n = document.getElementById('inp-nombre').value.trim();
+  var t = document.getElementById('inp-tecnica').value;
+  var c = document.getElementById('inp-cantidad').value.trim();
+  var i = document.getElementById('inp-idea').value.trim();
+  var msg =
     'Hola! Me llamo ' + (n || '(sin nombre)') + ' y quiero cotizar un pedido.' +
     '\nTécnica: ' + (t || 'sin especificar') +
     '\nCantidad: ' + (c || 'sin especificar') +
@@ -700,63 +722,90 @@ function enviarWSP() {
   window.open('https://wa.me/3834586038?text=' + encodeURIComponent(msg), '_blank');
 }
 
-/* ── Carrusel Buzos Estampados ── */
+/* ═══════════════════════════════════════════════
+   CARRUSEL — 4 slides fijos, 2 visibles desktop
+   Lógica: sin loop infinito, navegación simple
+   ═══════════════════════════════════════════════ */
 (function () {
-  const track = document.getElementById('bcsTrack');
+  var track    = document.getElementById('bcsTrack');
+  var dotsWrap = document.getElementById('bcsDots');
+  var btnPrev  = document.getElementById('bcsPrev');
+  var btnNext  = document.getElementById('bcsNext');
   if (!track) return;
-  const slides = Array.from(track.children);
-  const total = slides.length;
-  const dotsWrap = document.getElementById('bcsDots');
-  let current = 0, autoTimer;
 
+  var slides   = Array.from(track.children);
+  var total    = slides.length;   /* 4 */
+  var current  = 0;
+  var autoTimer;
+
+  /* cuántos slides se ven a la vez */
   function getVisible() {
-    const w = window.innerWidth;
-    if (w <= 540) return 1;
-    if (w <= 900) return 2;
-    return 3;
+    return window.innerWidth <= 768 ? 1 : 2;
   }
-  function maxIdx() { return Math.max(0, total - getVisible()); }
 
+  /* índice máximo al que se puede ir */
+  function maxIdx() {
+    return Math.max(0, total - getVisible());
+  }
+
+  /* construir/reconstruir los dots */
   function buildDots() {
     dotsWrap.innerHTML = '';
-    for (let i = 0; i <= maxIdx(); i++) {
-      const d = document.createElement('button');
+    var count = maxIdx() + 1;
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement('button');
       d.className = 'bcs-dot' + (i === current ? ' active' : '');
-      d.setAttribute('aria-label', 'Ir a slide ' + (i + 1));
-      d.addEventListener('click', () => goTo(i));
+      d.setAttribute('aria-label', 'Slide ' + (i + 1) + ' de ' + count);
+      (function(idx) {
+        d.addEventListener('click', function() { goTo(idx); });
+      })(i);
       dotsWrap.appendChild(d);
     }
   }
 
+  /* mover al slide n */
   function goTo(n) {
     current = Math.max(0, Math.min(n, maxIdx()));
-    const slideW = slides[0].offsetWidth + 3;
+    /* ancho de un slide + gap (3px) */
+    var slideW = slides[0].offsetWidth + 3;
     track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
-    dotsWrap.querySelectorAll('.bcs-dot').forEach(function(d, i) {
+    /* actualizar dots */
+    Array.from(dotsWrap.children).forEach(function(d, i) {
       d.classList.toggle('active', i === current);
     });
+    /* deshabilitar botones en los extremos */
+    btnPrev.style.opacity = current === 0      ? '0.35' : '1';
+    btnNext.style.opacity = current === maxIdx() ? '0.35' : '1';
+    /* reiniciar autoplay */
     clearInterval(autoTimer);
     autoTimer = setInterval(function() {
       goTo(current < maxIdx() ? current + 1 : 0);
-    }, 4200);
+    }, 5000);
   }
 
-  document.getElementById('bcsPrev').addEventListener('click', () => goTo(current - 1));
-  document.getElementById('bcsNext').addEventListener('click', () => goTo(current + 1));
+  btnPrev.addEventListener('click', function() { goTo(current - 1); });
+  btnNext.addEventListener('click', function() { goTo(current + 1); });
 
   /* swipe táctil */
-  let tx = 0;
-  track.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
+  var touchX = 0;
+  track.addEventListener('touchstart', function(e) {
+    touchX = e.touches[0].clientX;
+  }, { passive: true });
   track.addEventListener('touchend', function(e) {
-    const diff = tx - e.changedTouches[0].clientX;
+    var diff = touchX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
   });
 
+  /* init y resize */
   buildDots();
   goTo(0);
+  var resizeTimer;
   window.addEventListener('resize', function() {
-    buildDots();
-    goTo(Math.min(current, maxIdx()));
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      buildDots();
+      goTo(Math.min(current, maxIdx()));
+    }, 150);
   });
 })();
 </script>
