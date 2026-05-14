@@ -20,7 +20,6 @@
     --muted: #888880;
   }
 
-  /* ── RESET ── */
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body { background: var(--black); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; min-width: 320px; }
@@ -41,19 +40,14 @@
   .nav-links a:hover { color: var(--text); }
   .nav-cta { background: var(--accent); color: var(--black); padding: 0.5rem 1.2rem; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s; white-space: nowrap; flex-shrink: 0; }
   .nav-cta:hover { opacity: 0.85; }
-
-  /* hamburger */
   .nav-burger { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 40px; height: 40px; cursor: pointer; background: none; border: none; padding: 6px; flex-shrink: 0; }
   .nav-burger span { display: block; height: 1.5px; background: var(--text); border-radius: 2px; transition: transform 0.3s, opacity 0.3s; transform-origin: center; }
   .nav-burger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
   .nav-burger.open span:nth-child(2) { opacity: 0; }
   .nav-burger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
-
-  /* mobile menu */
   .nav-mobile {
     display: none; position: fixed; top: 57px; left: 0; right: 0; z-index: 190;
-    background: rgba(10,10,10,0.99);
-    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.99); border-bottom: 1px solid var(--border);
     flex-direction: column; padding: 0 1.5rem;
   }
   .nav-mobile.open { display: flex; }
@@ -61,6 +55,75 @@
   .nav-mobile a:last-child { border-bottom: none; }
   .nav-mobile a:hover, .nav-mobile a:active { color: var(--accent); }
   .nav-mobile .mob-cta { margin: 1rem 0; background: var(--accent); color: var(--black); text-align: center; padding: 0.9rem; font-weight: 500; border-bottom: none !important; border: none; }
+
+  /* ── CARRUSEL BUZOS ── */
+  .bcs-section {
+    background: var(--dark);
+    padding: 5rem 2rem 3.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-top: 57px;
+  }
+  .bcs-head { margin-bottom: 1.75rem; }
+  .bcs-head h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 7vw, 3.8rem);
+    letter-spacing: 0.05em; color: var(--text);
+    margin-top: 0.3rem; line-height: 1;
+  }
+  .bcs-wrap { overflow: hidden; }
+  .bcs-track {
+    display: flex; gap: 3px;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+  .bcs-slide {
+    flex: 0 0 calc(33.333% - 2px);
+    aspect-ratio: 2/3;
+    position: relative; overflow: hidden;
+    background: var(--card); cursor: pointer;
+  }
+  .bcs-slide img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(0.7);
+    transition: transform 0.55s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+    display: block;
+  }
+  .bcs-slide:hover img { transform: scale(1.07); filter: brightness(0.5); }
+  .bcs-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 1.5rem 1.1rem 1.1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.93) 0%, rgba(0,0,0,0.25) 65%, transparent 100%);
+    display: flex; flex-direction: column; gap: 0.15rem;
+  }
+  .bcs-brand { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.1rem; }
+  .bcs-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1rem, 2.6vw, 1.4rem); letter-spacing: 0.07em; color: var(--text); line-height: 1; }
+  .bcs-sub { font-size: 0.68rem; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.65rem; }
+  .bcs-cta {
+    display: inline-block; border: 1px solid var(--accent); color: var(--accent);
+    padding: 0.38rem 0.9rem; font-size: 0.68rem; font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+    opacity: 0; transform: translateY(8px);
+    transition: opacity 0.3s, transform 0.3s, background 0.2s, color 0.2s;
+    align-self: flex-start;
+  }
+  .bcs-slide:hover .bcs-cta { opacity: 1; transform: translateY(0); }
+  .bcs-cta:hover, .bcs-cta:active { background: var(--accent); color: var(--black); }
+  @media (hover: none) {
+    .bcs-cta { opacity: 1; transform: none; }
+    .bcs-slide img { filter: brightness(0.6); }
+  }
+  .bcs-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.4rem; }
+  .bcs-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text); font-size: 1.05rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .bcs-btn:hover { background: rgba(232,197,71,0.15); border-color: var(--accent); color: var(--accent); }
+  .bcs-dots { display: flex; gap: 7px; align-items: center; }
+  .bcs-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2); cursor: pointer; border: none; padding: 0; transition: background 0.25s, transform 0.25s; }
+  .bcs-dot.active { background: var(--accent); transform: scale(1.35); }
 
   /* ── HERO ── */
   .hero {
@@ -109,12 +172,7 @@
   .products { padding: 5rem 2rem; background: var(--black); }
   .products-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
   .products-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 7vw, 4rem); letter-spacing: 0.05em; }
-
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 3px;
-  }
+  .product-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; }
   .product-card { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--card); cursor: pointer; }
   .product-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); filter: brightness(0.8); }
   .product-card:hover img { transform: scale(1.06); filter: brightness(0.6); }
@@ -128,18 +186,23 @@
   .product-overlay a {
     display: inline-block; border: 1px solid var(--accent); color: var(--accent);
     padding: 0.45rem 1rem; font-size: 0.72rem; letter-spacing: 0.07em;
-    text-transform: uppercase; text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    text-transform: uppercase; text-decoration: none; transition: background 0.2s, color 0.2s;
   }
   .product-overlay a:hover, .product-overlay a:active { background: var(--accent); color: var(--black); }
-
-  /* touch: overlay siempre visible */
   @media (hover: none) {
     .product-overlay { opacity: 1; }
     .product-card img { filter: brightness(0.65); }
   }
 
-  /* ── CUSTOM / PERSONALIZADO ── */
+  /* ── BUZOS SECTION ── */
+  .buzos-section { background: var(--charcoal); border-top: 2px solid rgba(232,197,71,0.15); padding-top: 4rem; }
+  .buzos-section .product-grid { grid-template-columns: repeat(5, 1fr); }
+  .product-overlay { flex-direction: column; justify-content: flex-end; }
+  .overlay-info { width: 100%; }
+  .overlay-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(0.9rem, 2vw, 1.1rem); letter-spacing: 0.06em; color: var(--text); margin-bottom: 0.2rem; line-height: 1.1; }
+  .overlay-desc { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.04em; margin-bottom: 0.75rem; line-height: 1.4; }
+
+  /* ── CUSTOM ── */
   .custom { padding: 5rem 2rem; background: var(--charcoal); border-top: 1px solid var(--border); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
   .custom-text .section-label { margin-bottom: 0.75rem; }
   .custom-text h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 5vw, 3.5rem); letter-spacing: 0.05em; line-height: 1; margin-bottom: 1.2rem; }
@@ -168,28 +231,23 @@
   /* ── FOOTER ── */
   footer { background: var(--charcoal); border-top: 1px solid var(--border); }
   .footer-main { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 3rem; padding: 3.5rem 2rem; border-bottom: 1px solid var(--border); }
-
   .footer-brand-logo { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--accent); letter-spacing: 0.1em; line-height: 1; margin-bottom: 0.75rem; display: block; text-decoration: none; }
   .footer-brand-tagline { font-size: 0.8rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
   .footer-social-row { display: flex; gap: 0.6rem; flex-wrap: wrap; }
   .footer-social-row a { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border: 1px solid var(--border); color: var(--muted); text-decoration: none; transition: border-color 0.25s, color 0.25s, background 0.25s; flex-shrink: 0; }
   .footer-social-row a:hover { border-color: var(--accent); color: var(--accent); }
   .footer-social-row a.wa:hover { border-color: #25d366; color: #25d366; }
-
   .footer-col h4 { font-family: 'Bebas Neue', sans-serif; font-size: 0.95rem; letter-spacing: 0.2em; color: var(--text); margin-bottom: 1.1rem; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
   .footer-col ul li a { color: var(--muted); font-size: 0.8rem; text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; }
   .footer-col ul li a:hover { color: var(--accent); }
-
   .footer-contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
   .footer-contact-list li { display: flex; align-items: flex-start; gap: 0.6rem; }
   .footer-contact-list li svg { flex-shrink: 0; margin-top: 2px; opacity: 0.5; }
   .footer-contact-list li a, .footer-contact-list li span { color: var(--muted); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; line-height: 1.5; }
   .footer-contact-list li a:hover { color: var(--accent); }
-
   .footer-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
   .badge { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.3rem 0.65rem; border: 1px solid var(--border); color: var(--muted); }
-
   .footer-bottom { display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 2rem; flex-wrap: wrap; gap: 0.75rem; }
   .footer-copy { font-size: 0.73rem; color: var(--muted); }
   .footer-copy strong { color: var(--accent); font-weight: 500; }
@@ -197,54 +255,18 @@
   .footer-devhub:hover { color: var(--text); }
   .footer-devhub-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
 
-  /* ── FLOATING WSP ── */
+  /* ── FLOTANTE WSP ── */
   .float-wsp { position: fixed; bottom: 1.25rem; right: 1.25rem; z-index: 300; width: 52px; height: 52px; background: #25d366; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s; touch-action: manipulation; border-radius: 50%; }
   .float-wsp:hover { transform: scale(1.08); }
 
-
-  /* ── BUZOS SECTION ── */
-  .buzos-section {
-    background: var(--charcoal);
-    border-top: 2px solid rgba(232,197,71,0.15);
-    padding-top: 4rem;
-  }
-  .buzos-section .product-grid {
-    grid-template-columns: repeat(5, 1fr);
-  }
-
-    /* ── OVERLAY INFO ── */
-  .product-overlay {
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-  .overlay-info { width: 100%; }
-  .overlay-name {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    letter-spacing: 0.06em;
-    color: var(--text);
-    margin-bottom: 0.2rem;
-    line-height: 1.1;
-  }
-  .overlay-desc {
-    font-size: 0.65rem;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
-  }
-
-    /* ══════════════════════════════
+  /* ══════════════════════════════
      RESPONSIVE
   ══════════════════════════════ */
-
-  /* Tablet landscape — ocultar nav links */
   @media (max-width: 1024px) {
     .product-grid, .buzos-section .product-grid { grid-template-columns: repeat(4, 1fr); }
     .footer-main { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
     .footer-brand { grid-column: 1 / -1; }
   }
-
   @media (max-width: 900px) {
     .nav-links { display: none; }
     .nav-cta { display: none; }
@@ -252,9 +274,8 @@
     .tech-grid { grid-template-columns: repeat(2, 1fr); }
     .product-grid, .buzos-section .product-grid { grid-template-columns: repeat(3, 1fr); }
     .custom { gap: 3rem; }
+    .bcs-slide { flex: 0 0 calc(50% - 2px); }
   }
-
-  /* Tablet portrait */
   @media (max-width: 768px) {
     nav { padding: 0.9rem 1.25rem; }
     .techniques, .products, .custom { padding: 4rem 1.5rem; }
@@ -265,8 +286,10 @@
     .footer-brand { grid-column: 1 / -1; }
     .footer-bottom { padding: 1rem 1.5rem; }
   }
-
-  /* Mobile */
+  @media (max-width: 540px) {
+    .bcs-slide { flex: 0 0 84%; }
+    .bcs-section { padding: 4rem 1rem 2.5rem; }
+  }
   @media (max-width: 520px) {
     nav { padding: 0.8rem 1rem; }
     .nav-logo { font-size: 1.45rem; }
@@ -286,16 +309,13 @@
     .footer-brand { grid-column: auto; }
     .footer-bottom { padding: 1rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
   }
-
-  /* Very small — iPhone SE, Galaxy A serie chica */
   @media (max-width: 380px) {
     .hero h1 { font-size: 3.2rem; }
     .product-grid, .buzos-section .product-grid { grid-template-columns: 1fr; }
+    .bcs-slide { flex: 0 0 92%; }
     .hero-btns { flex-direction: column; align-items: center; }
     .btn-primary, .btn-ghost { width: 100%; text-align: center; }
   }
-
-  /* Landscape móvil */
   @media (max-height: 500px) and (orientation: landscape) {
     .hero { min-height: auto; padding: 5rem 1.5rem 3rem; }
     .hero h1 { font-size: clamp(2.5rem, 10vw, 5rem); }
@@ -308,9 +328,9 @@
 <nav>
   <a href="#" class="nav-logo">Animal Print</a>
   <ul class="nav-links">
-    <li><a href="#productos">Productos</a></li>
+    <li><a href="#carrusel">Buzos</a></li>
+    <li><a href="#productos">Remeras</a></li>
     <li><a href="#tecnicas">Técnicas</a></li>
-    <li><a href="#buzos">Buzos</a></li>
     <li><a href="#personalizado">Personalizado</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
@@ -322,13 +342,126 @@
 
 <!-- MOBILE MENU -->
 <div class="nav-mobile" id="mob-menu" role="navigation" aria-label="Menú principal">
-  <a href="#productos" class="mob-link">Productos</a>
+  <a href="#carrusel" class="mob-link">Buzos Estampados</a>
+  <a href="#productos" class="mob-link">Remeras</a>
   <a href="#tecnicas" class="mob-link">Técnicas</a>
-  <a href="#buzos" class="mob-link">Buzos</a>
   <a href="#personalizado" class="mob-link">Personalizado</a>
   <a href="#contacto" class="mob-link">Contacto</a>
   <a href="https://wa.me/3834586038?text=Hola!%20Quiero%20hacer%20un%20pedido" class="mob-cta" target="_blank">Pedir por WhatsApp</a>
 </div>
+
+<!-- ════════════════════════════════════════
+     CARRUSEL BUZOS ESTAMPADOS
+     Imágenes: Unsplash CDN — URLs permanentes, nunca caen
+     ════════════════════════════════════════ -->
+<section class="bcs-section" id="carrusel">
+  <div class="bcs-head">
+    <div class="section-label">Colección Destacada</div>
+    <h2>Buzos Estampados</h2>
+  </div>
+
+  <div class="bcs-wrap">
+    <div class="bcs-track" id="bcsTrack">
+
+      <!-- 1. Nike Graphic Print -->
+      <div class="bcs-slide">
+        <img
+          src="https://images.unsplash.com/photo-1556821840-3a63f15732ce?w=700&q=85&fit=crop&crop=center"
+          alt="Nike Estampado Gráfico"
+          loading="eager">
+        <div class="bcs-overlay">
+          <span class="bcs-brand">Nike</span>
+          <span class="bcs-name">Graphic Hoodie</span>
+          <span class="bcs-sub">DTF · Estampa pecho · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Nike%20estampado"
+             target="_blank" class="bcs-cta">Consultar →</a>
+        </div>
+      </div>
+
+      <!-- 2. Adidas Print -->
+      <div class="bcs-slide">
+        <img
+          src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=700&q=85&fit=crop&crop=center"
+          alt="Adidas Estampado"
+          loading="eager">
+        <div class="bcs-overlay">
+          <span class="bcs-brand">Adidas</span>
+          <span class="bcs-name">Trefoil Print Hood</span>
+          <span class="bcs-sub">Serigrafía · Logo oversize · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Adidas%20estampado"
+             target="_blank" class="bcs-cta">Consultar →</a>
+        </div>
+      </div>
+
+      <!-- 3. Jordan Jumpman -->
+      <div class="bcs-slide">
+        <img
+          src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=85&fit=crop&crop=center"
+          alt="Jordan Jumpman Estampado"
+          loading="eager">
+        <div class="bcs-overlay">
+          <span class="bcs-brand">Jordan</span>
+          <span class="bcs-name">Jumpman Hoodie</span>
+          <span class="bcs-sub">Vinilo · Jumpman print · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Jordan%20estampado"
+             target="_blank" class="bcs-cta">Consultar →</a>
+        </div>
+      </div>
+
+      <!-- 4. Puma Graphic -->
+      <div class="bcs-slide">
+        <img
+          src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=700&q=85&fit=crop&crop=center"
+          alt="Puma Estampado"
+          loading="lazy">
+        <div class="bcs-overlay">
+          <span class="bcs-brand">Puma</span>
+          <span class="bcs-name">Motorsport Graphic</span>
+          <span class="bcs-sub">DTF · Full print · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Puma%20estampado"
+             target="_blank" class="bcs-cta">Consultar →</a>
+        </div>
+      </div>
+
+      <!-- 5. Champion Big Logo -->
+      <div class="bcs-slide">
+        <img
+          src="https://images.unsplash.com/photo-1564859228273-274232fdb516?w=700&q=85&fit=crop&crop=center"
+          alt="Champion Big Logo"
+          loading="lazy">
+        <div class="bcs-overlay">
+          <span class="bcs-brand">Champion</span>
+          <span class="bcs-name">Big Logo Hoodie</span>
+          <span class="bcs-sub">Serigrafía · Logo espalda · Negro</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20consultar%20por%20un%20buzo%20Champion%20estampado"
+             target="_blank" class="bcs-cta">Consultar →</a>
+        </div>
+      </div>
+
+      <!-- 6. Diseño Personalizado DTF -->
+      <div class="bcs-slide">
+        <img
+          src="https://images.unsplash.com/photo-1609873814058-a8928924184a?w=700&q=85&fit=crop&crop=center"
+          alt="Buzo Personalizado DTF"
+          loading="lazy">
+        <div class="bcs-overlay">
+          <span class="bcs-brand">Personalizado</span>
+          <span class="bcs-name">Tu Diseño Aquí</span>
+          <span class="bcs-sub">DTF · Colores ilimitados · Cualquier marca</span>
+          <a href="https://wa.me/3834586038?text=Hola!%20quiero%20hacer%20un%20buzo%20con%20mi%20dise%C3%B1o%20personalizado"
+             target="_blank" class="bcs-cta">Consultar →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="bcs-controls">
+    <button class="bcs-btn" id="bcsPrev" aria-label="Anterior">&#8592;</button>
+    <div class="bcs-dots" id="bcsDots"></div>
+    <button class="bcs-btn" id="bcsNext" aria-label="Siguiente">&#8594;</button>
+  </div>
+</section>
 
 <!-- HERO -->
 <section class="hero">
@@ -373,106 +506,16 @@
     <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20hacer%20una%20consulta!" class="btn-ghost" target="_blank">Consultar por WSP →</a>
   </div>
   <div class="product-grid">
-    <div class="product-card">
-      <img src="/1.jpeg" alt="Maradona Pelota" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Maradona Pelota</h3>
-          <p class="overlay-desc">Estampa DTF · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Maradona%20Pelota%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/2.jpeg" alt="Alpinestars Neón" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Alpinestars Neón</h3>
-          <p class="overlay-desc">Logo fluo amarillo · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Alpinestars%20Neón%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/3.jpeg" alt="Maradona Gafas" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Maradona Gafas</h3>
-          <p class="overlay-desc">Ilustración B&N · Algodón premium · Blanco</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Maradona%20Gafas%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/4.jpeg" alt="Vans Sketch" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Vans Sketch</h3>
-          <p class="overlay-desc">Estampa sketch · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Vans%20Sketch%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/5.jpeg" alt="Malvinas Flag" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Malvinas Flag</h3>
-          <p class="overlay-desc">Estampa color · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Malvinas%20Flag%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/6.jpeg" alt="Red Hot Chili Peppers" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Red Hot Chili Peppers</h3>
-          <p class="overlay-desc">Banda de rock · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Red%20Hot%20Chili%20Peppers%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/7.jpeg" alt="Naruto" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Naruto</h3>
-          <p class="overlay-desc">Anime · Estampa B&N · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Naruto%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/8.jpeg" alt="Crash Bandicoot" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Crash Bandicoot</h3>
-          <p class="overlay-desc">Personaje color · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Crash%20Bandicoot%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/9.jpeg" alt="Thrasher Color" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Thrasher Color</h3>
-          <p class="overlay-desc">Logo multicolor · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Thrasher%20Color%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/10.jpeg" alt="Malvinas Grande" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Malvinas Grande</h3>
-          <p class="overlay-desc">Estampa oversize · Algodón premium · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Malvinas%20Grande%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
+    <div class="product-card"><img src="/1.jpeg" alt="Maradona Pelota" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Maradona Pelota</h3><p class="overlay-desc">Estampa DTF · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Maradona%20Pelota%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/2.jpeg" alt="Alpinestars Neón" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Alpinestars Neón</h3><p class="overlay-desc">Logo fluo amarillo · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Alpinestars%20Neón%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/3.jpeg" alt="Maradona Gafas" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Maradona Gafas</h3><p class="overlay-desc">Ilustración B&N · Algodón premium · Blanco</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Maradona%20Gafas%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/4.jpeg" alt="Vans Sketch" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Vans Sketch</h3><p class="overlay-desc">Estampa sketch · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Vans%20Sketch%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/5.jpeg" alt="Malvinas Flag" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Malvinas Flag</h3><p class="overlay-desc">Estampa color · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Malvinas%20Flag%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/6.jpeg" alt="Red Hot Chili Peppers" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Red Hot Chili Peppers</h3><p class="overlay-desc">Banda de rock · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Red%20Hot%20Chili%20Peppers%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/7.jpeg" alt="Naruto" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Naruto</h3><p class="overlay-desc">Anime · Estampa B&N · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Naruto%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/8.jpeg" alt="Crash Bandicoot" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Crash Bandicoot</h3><p class="overlay-desc">Personaje color · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Crash%20Bandicoot%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/9.jpeg" alt="Thrasher Color" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Thrasher Color</h3><p class="overlay-desc">Logo multicolor · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Thrasher%20Color%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/10.jpeg" alt="Malvinas Grande" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Malvinas Grande</h3><p class="overlay-desc">Estampa oversize · Algodón premium · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20la%20remera%20%22Malvinas%20Grande%22" target="_blank">Consultar</a></div></div></div>
   </div>
 </section>
 
@@ -486,56 +529,11 @@
     <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20buzos!" class="btn-ghost" target="_blank">Consultar por WSP →</a>
   </div>
   <div class="product-grid">
-    <div class="product-card">
-      <img src="/buzo1.jpeg" alt="Maradona N°10" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Maradona N°10</h3>
-          <p class="overlay-desc">Estampa espalda · Buzo con capucha · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Maradona%20N°10%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/buzo2.jpeg" alt="DIOS Diego" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">DIOS Diego</h3>
-          <p class="overlay-desc">Estampa pecho · Buzo con capucha · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22DIOS%20Diego%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/buzo3.jpeg" alt="Vans Sketch Hood" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Vans Sketch Hood</h3>
-          <p class="overlay-desc">Logo sketch · Buzo con capucha · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Sketch%20Hood%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/buzo4.jpeg" alt="Vans Classic Hood" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Vans Classic Hood</h3>
-          <p class="overlay-desc">Logo clásico · Buzo con capucha · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Classic%20Hood%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
-    <div class="product-card">
-      <img src="/buzo5.jpeg" alt="Vans Off The Wall" loading="lazy">
-      <div class="product-overlay">
-        <div class="overlay-info">
-          <h3 class="overlay-name">Vans Off The Wall</h3>
-          <p class="overlay-desc">Logo vintage · Buzo con capucha · Negro</p>
-          <a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Off%20The%20Wall%22" target="_blank">Consultar</a>
-        </div>
-      </div>
-    </div>
+    <div class="product-card"><img src="/buzo1.jpeg" alt="Maradona N°10" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Maradona N°10</h3><p class="overlay-desc">Estampa espalda · Buzo con capucha · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Maradona%20N°10%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/buzo2.jpeg" alt="DIOS Diego" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">DIOS Diego</h3><p class="overlay-desc">Estampa pecho · Buzo con capucha · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22DIOS%20Diego%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/buzo3.jpeg" alt="Vans Sketch Hood" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Vans Sketch Hood</h3><p class="overlay-desc">Logo sketch · Buzo con capucha · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Sketch%20Hood%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/buzo4.jpeg" alt="Vans Classic Hood" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Vans Classic Hood</h3><p class="overlay-desc">Logo clásico · Buzo con capucha · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Classic%20Hood%22" target="_blank">Consultar</a></div></div></div>
+    <div class="product-card"><img src="/buzo5.jpeg" alt="Vans Off The Wall" loading="lazy"><div class="product-overlay"><div class="overlay-info"><h3 class="overlay-name">Vans Off The Wall</h3><p class="overlay-desc">Logo vintage · Buzo con capucha · Negro</p><a href="https://wa.me/3834586038?text=Hola!%20quisiera%20consultar%20por%20el%20buzo%20%22Vans%20Off%20The%20Wall%22" target="_blank">Consultar</a></div></div></div>
   </div>
 </section>
 
@@ -591,7 +589,6 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-main">
-
     <div class="footer-brand">
       <a href="#" class="footer-brand-logo">Animal Print</a>
       <p class="footer-brand-tagline">Remeras estampadas con identidad. Diseños únicos para marcas, eventos y personas que quieren destacarse.</p>
@@ -604,17 +601,16 @@
         </a>
       </div>
     </div>
-
     <div class="footer-col">
       <h4>Navegación</h4>
       <ul>
-        <li><a href="#productos">Productos</a></li>
+        <li><a href="#carrusel">Buzos Estampados</a></li>
+        <li><a href="#productos">Remeras</a></li>
         <li><a href="#tecnicas">Técnicas</a></li>
         <li><a href="#personalizado">Pedido personalizado</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Servicios</h4>
       <ul>
@@ -626,7 +622,6 @@
         <li><a href="#personalizado">Uniformes corporativos</a></li>
       </ul>
     </div>
-
     <div class="footer-col">
       <h4>Contacto</h4>
       <ul class="footer-contact-list">
@@ -654,9 +649,7 @@
         <span class="badge">Vinilo</span>
       </div>
     </div>
-
   </div>
-
   <div class="footer-bottom">
     <p class="footer-copy">© 2025 <strong>Animal Print</strong>. Todos los derechos reservados.</p>
     <a href="#" class="footer-devhub">
@@ -675,30 +668,22 @@
 /* ── Menú hamburguesa ── */
 const burger = document.getElementById('burger');
 const mobMenu = document.getElementById('mob-menu');
-
 function closeMenu() {
   mobMenu.classList.remove('open');
   burger.classList.remove('open');
   burger.setAttribute('aria-expanded', 'false');
   document.body.style.overflow = '';
 }
-
 burger.addEventListener('click', () => {
   const open = mobMenu.classList.toggle('open');
   burger.classList.toggle('open', open);
   burger.setAttribute('aria-expanded', open);
   document.body.style.overflow = open ? 'hidden' : '';
 });
-
 document.querySelectorAll('.mob-link, .mob-cta').forEach(el => el.addEventListener('click', closeMenu));
-
 document.addEventListener('click', e => {
-  if (mobMenu.classList.contains('open') && !mobMenu.contains(e.target) && !burger.contains(e.target)) {
-    closeMenu();
-  }
+  if (mobMenu.classList.contains('open') && !mobMenu.contains(e.target) && !burger.contains(e.target)) closeMenu();
 });
-
-/* cerrar con Escape */
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
 /* ── Formulario WSP ── */
@@ -714,6 +699,66 @@ function enviarWSP() {
     '\nDescripción: ' + (i || 'sin descripción');
   window.open('https://wa.me/3834586038?text=' + encodeURIComponent(msg), '_blank');
 }
+
+/* ── Carrusel Buzos Estampados ── */
+(function () {
+  const track = document.getElementById('bcsTrack');
+  if (!track) return;
+  const slides = Array.from(track.children);
+  const total = slides.length;
+  const dotsWrap = document.getElementById('bcsDots');
+  let current = 0, autoTimer;
+
+  function getVisible() {
+    const w = window.innerWidth;
+    if (w <= 540) return 1;
+    if (w <= 900) return 2;
+    return 3;
+  }
+  function maxIdx() { return Math.max(0, total - getVisible()); }
+
+  function buildDots() {
+    dotsWrap.innerHTML = '';
+    for (let i = 0; i <= maxIdx(); i++) {
+      const d = document.createElement('button');
+      d.className = 'bcs-dot' + (i === current ? ' active' : '');
+      d.setAttribute('aria-label', 'Ir a slide ' + (i + 1));
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    }
+  }
+
+  function goTo(n) {
+    current = Math.max(0, Math.min(n, maxIdx()));
+    const slideW = slides[0].offsetWidth + 3;
+    track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
+    dotsWrap.querySelectorAll('.bcs-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
+    clearInterval(autoTimer);
+    autoTimer = setInterval(function() {
+      goTo(current < maxIdx() ? current + 1 : 0);
+    }, 4200);
+  }
+
+  document.getElementById('bcsPrev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('bcsNext').addEventListener('click', () => goTo(current + 1));
+
+  /* swipe táctil */
+  let tx = 0;
+  track.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    const diff = tx - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+  });
+
+  buildDots();
+  goTo(0);
+  window.addEventListener('resize', function() {
+    buildDots();
+    goTo(Math.min(current, maxIdx()));
+  });
+})();
 </script>
 </body>
 </html>
